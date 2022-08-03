@@ -32,3 +32,4 @@ public/video/*
 !src/public/video/example.mp4
 
 public/dataset
+src/video
