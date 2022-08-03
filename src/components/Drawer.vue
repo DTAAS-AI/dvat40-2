@@ -28,6 +28,18 @@
           </q-item-section>
           <q-item-section>{{ item.label }}</q-item-section>
         </q-item>
+        <q-item
+            clickable
+            type="a"
+            href="https://dtaas.notion.site/2e3c66af94f349a983d86cc6777de5e3"
+            target="_blank"
+            @click="drawer = false"
+        >
+          <q-item-section avatar>
+            <q-icon name="help"></q-icon>
+          </q-item-section>
+          <q-item-section>Help</q-item-section>
+        </q-item>
         <q-item class="fixed-bottom">
           <q-item-section class="text-center">
             <VersionBadge/>
@@ -62,16 +74,16 @@ const menuList = [
     label: 'Preference',
     path: '/preference'
   },
-  {
-    icon: 'help',
-    label: 'Help',
-    path: '/help'
-  },
-  {
-    icon: 'book',
-    label: 'About',
-    path: '/about'
-  }
+  // {
+  //   icon: 'help',
+  //   label: 'Help',
+  //   path: '/help'
+  // },
+  // {
+  //   icon: 'book',
+  //   label: 'About',
+  //   path: '/about'
+  // }
 ]
 const { drawer } = storeToRefs(useMainStore())
 const annotationStore = useAnnotationStore()

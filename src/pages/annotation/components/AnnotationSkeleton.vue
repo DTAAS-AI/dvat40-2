@@ -2,17 +2,17 @@
   <div class="column flex-center">
     <img
         v-if="$q.dark.isActive"
-        style="width: 150px; padding: 100px 0 50px 0;"
+        style="width: 150px; padding: 100px 0 30px 0;"
         src="/img/logo-dark.svg"
         alt="Logo"
     >
     <img
         v-else
-        style="width: 150px; padding: 100px 0 50px 0;"
+        style="width: 150px; padding: 100px 0 30px 0;"
         src="/img/logo.svg"
         alt="Logo"
     >
-    <div class="text-h4">Vidat</div>
+    <div class="text-h4">DVAT</div>
     <VersionBadge/>
     <q-btn-group
         style="margin-top: 30px;"
@@ -33,7 +33,7 @@
           @click="handleLoad"
       />
     </q-btn-group>
-    <div style="margin-top: 20px;">
+    <!-- <div style="margin-top: 20px;">
       <router-link
           class="text-body1"
           style="margin: 0 10px; text-decoration: underline;"
@@ -50,7 +50,7 @@
           style="margin: 0 10px; text-decoration: underline;"
           to="/about"
       ><span>About</span></router-link>
-    </div>
+    </div> -->
   </div>
 </template>
 

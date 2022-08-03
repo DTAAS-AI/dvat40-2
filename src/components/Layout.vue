@@ -16,9 +16,8 @@
             @click="drawer = !drawer"
         ></q-btn>
         <q-toolbar-title class="text-center">
-          <a
+          <span
               class="q-mr-sm"
-              href="https://www.anu.edu.au/"
               target="_blank"
           >
             <q-avatar
@@ -36,12 +35,12 @@
                   alt="logo"
               >
             </q-avatar>
-          </a>
+          </span>
           <router-link
               class="vertical-middle"
               :to="'/'"
           >
-            ANU CVML Video Annotation Tool
+            DTAAS Video Annotation Tool
           </router-link>
         </q-toolbar-title>
         <q-circular-progress
@@ -88,13 +87,7 @@
             class="text-center text-caption"
             :class="$q.dark.isActive ? 'text-gray-4': 'text-black'"
         >
-          Copyright © 2022,
-          <a
-              href="https://github.com/anucvml/vidat"
-              target="_blank"
-          >
-            ANU CVML
-          </a>. All rights reserved.
+          Copyright © 2022, DTAAS. All rights reserved.
         </q-toolbar-title>
       </q-toolbar>
     </q-footer>
