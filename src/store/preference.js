@@ -9,9 +9,9 @@ const DEFAULT_PREFERENCE = {
   defaultFps: 10,
   defaultFpk: 50,
   decoder: 'auto', // auto, v1, v2
-  objects: true,
-  regions: true,
-  skeletons: true,
+  objects: false,
+  regions: false,
+  skeletons: false,
   actions: true,
   muted: true,
   grayscale: false,

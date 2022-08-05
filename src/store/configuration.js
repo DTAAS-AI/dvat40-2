@@ -10,163 +10,83 @@ const SKELETON_LABEL_LS_KEY = 'skeletonTypeData'
 const DEFAULT_CONFIGURATION = {
   objectLabelData: [
     {
-      'id': 0,
-      'name': 'default',
-      'color': '#00FF00'
+      "id": 0,
+      "name": "default",
+      "color": "#00FF00",
+      "code": "A00"
     },
     {
-      'id': 1,
-      'name': 'leg',
-      'color': '#FF0000'
+      "id": 1,
+      "name": "손 짚고 앉기",
+      "color": "#c84f4b",
+      "code": "A01"
     },
     {
-      'id': 2,
-      'name': 'table top',
-      'color': '#0000FF'
+      "id": 2,
+      "name": "손 짚지 않고 앉기",
+      "color": "#529ff0",
+      "code": "A02"
     },
     {
-      'id': 3,
-      'name': 'table',
-      'color': '#FF00FF'
+      "id": 3,
+      "name": "앉아서 양반다리 하기",
+      "color": "#96c28a",
+      "code": "A03"
     },
     {
-      'id': 4,
-      'name': 'shelf',
-      'color': '#00FF00'
+      "id": 4,
+      "name": "다리 꼬기",
+      "color": "#7f64d6",
+      "code": "A04"
     },
     {
-      'id': 5,
-      'name': 'side panel',
-      'color': '#118822'
+      "id": 5,
+      "name": "정면으로 눕기",
+      "color": "#de85d1",
+      "code": "A05"
     },
     {
-      'id': 6,
-      'name': 'top panel',
-      'color': '#776688'
+      "id": 6,
+      "name": "옆으로 눕기",
+      "color": "#6363d5",
+      "code": "A06"
     },
     {
-      'id': 7,
-      'name': 'front panel',
-      'color': '#6600EE'
-    },
-    {
-      'id': 8,
-      'name': 'back panel',
-      'color': '#AAAA33'
-    },
-    {
-      'id': 9,
-      'name': 'bottom panel',
-      'color': '#552277'
-    },
-    {
-      'id': 10,
-      'name': 'pin',
-      'color': '#CC66FF'
+      "id": 7,
+      "name": "엎드리기",
+      "color": "#c9708c",
+      "code": "A07"
     }
   ],
   actionLabelData: [
     {
-      'id': 0,
-      'name': 'default',
-      'color': '#0000FF',
-      'objects': [0]
+      "id": 0,
+      "name": "default",
+      "color": "#0000FF",
+      "objects": [
+          0
+      ]
     },
     {
-      'id': 1,
-      'name': 'pick up',
-      'color': '#00FFFF',
-      'objects': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+      "id": 16,
+      "name": "앉았다가 일어서기(의자, 소파)",
+      "color": "#77CCCC",
+      "objects": [
+          1,
+          2,
+          3,
+          4
+      ]
     },
     {
-      'id': 2,
-      'name': 'lay down',
-      'color': '#FF00FF',
-      'objects': [0]
-    },
-    {
-      'id': 3,
-      'name': 'push',
-      'color': '#85ad85',
-      'objects': [0]
-    },
-    {
-      'id': 4,
-      'name': 'align leg screw with table thread',
-      'color': '#adad91',
-      'objects': [0]
-    },
-    {
-      'id': 5,
-      'name': 'spin leg',
-      'color': '#CC55FF',
-      'objects': [0]
-    },
-    {
-      'id': 6,
-      'name': 'tighten leg',
-      'color': '#AABB22',
-      'objects': [0]
-    },
-    {
-      'id': 7,
-      'name': 'rotate table',
-      'color': '#FF2255',
-      'objects': [0]
-    },
-    {
-      'id': 8,
-      'name': 'flip',
-      'color': '#7755FF',
-      'objects': [0]
-    },
-    {
-      'id': 9,
-      'name': 'attach shelf to table',
-      'color': '#BB55BB',
-      'objects': [0]
-    },
-    {
-      'id': 10,
-      'name': 'align side panel holes with front panel dowels',
-      'color': '#EEBB33',
-      'objects': [0]
-    },
-    {
-      'id': 11,
-      'name': 'attach drawer side panel',
-      'color': '#DD5566',
-      'objects': [0]
-    },
-    {
-      'id': 12,
-      'name': 'attach drawer back panel',
-      'color': '#551144',
-      'objects': [0]
-    },
-    {
-      'id': 13,
-      'name': 'slide bottom of drawer',
-      'color': '#2299EE',
-      'objects': [0]
-    },
-    {
-      'id': 14,
-      'name': 'insert drawer pin',
-      'color': '#252545',
-      'objects': [0]
-    },
-    {
-      'id': 15,
-      'name': 'position the drawer right side up',
-      'color': '#99AA66',
-      'objects': [0]
-    },
-    {
-      'id': 16,
-      'name': 'other',
-      'color': '#77CCCC',
-      'objects': [0]
+      "id": 17,
+      "name": "누웠다가 일어서기(소파)",
+      "color": "#ce285a",
+      "objects": [
+          5,
+          6,
+          7
+      ]
     }
   ],
   skeletonTypeData: [

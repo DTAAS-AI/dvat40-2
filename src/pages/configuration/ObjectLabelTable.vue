@@ -38,6 +38,13 @@ const columnList = [
     label: 'operation',
     field: 'operation',
     type: 'operation'
+  },
+  {
+    name: 'code',
+    align: 'center',
+    label: 'code',
+    field: 'code',
+    type: 'input'
   }
 ]
 const configurationStore = useConfigurationStore()
