@@ -12,7 +12,7 @@
       binary-state-sort
   >
     <template v-slot:top="props">
-      <div class="col-6 q-table__title">Actions / Video Segments</div>
+      <div class="col-6 q-table__title">Actions</div>
       <q-space></q-space>
       <q-btn-group flat>
         <q-btn
@@ -261,13 +261,13 @@ const columnList = [
   {
     name: 'action',
     align: 'center',
-    label: 'action',
+    label: 'category',
     field: 'action'
   },
   {
     name: 'object',
     align: 'center',
-    label: 'object',
+    label: 'action',
     field: 'object'
   },
   {

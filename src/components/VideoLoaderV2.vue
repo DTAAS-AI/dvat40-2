@@ -29,13 +29,13 @@ onMounted(() => {
           if (!annotationStore.video.height) annotationStore.video.height = videoTrackInfo.height
           if (!annotationStore.video.fps) annotationStore.video.fps = videoTrackInfo.fps
           if (!annotationStore.video.frames) annotationStore.video.frames = videoTrackInfo.frames
-          const keyframeList = []
-          if (annotationStore.keyframeList.length === 0) {
-            for (let i = 0; i < annotationStore.video.frames; i += preferenceStore.defaultFpk) {
-              keyframeList.push(i)
-            }
-            annotationStore.keyframeList = keyframeList
-          }
+          // const keyframeList = []
+          // if (annotationStore.keyframeList.length === 0) {
+          //   for (let i = 0; i < annotationStore.video.frames; i += preferenceStore.defaultFpk) {
+          //     keyframeList.push(i)
+          //   }
+          //   annotationStore.keyframeList = keyframeList
+          // }
           utils.notify('Video loaded successfully!', 'positive')
         } else if (event.data.frame) {
           annotationStore.cachedFrameList[event.data.frameIndex] = event.data.frame

@@ -23,7 +23,7 @@ const DEFAULT_ANNOTATION = {
 
   leftCurrentFrame: 0,
   rightCurrentFrame: 0,
-  keyframeList: [],
+  // keyframeList: [],
   mode: 'object', // 'object', 'region', 'skeleton', 'action'
   skeletonTypeId: 0,
 
@@ -69,24 +69,24 @@ export const useAnnotationStore = defineStore('annotation', () => {
       immediate: true
     }
   )
-  watch(() => state.keyframeList, (newValue) => {
-    if (newValue.length >= 2) {
-      state.leftCurrentFrame = newValue[0]
-      state.rightCurrentFrame = newValue[1]
-    } else if (newValue.length === 1) {
-      state.rightCurrentFrame = newValue[0]
-      state.leftCurrentFrame = newValue[0]
-    } else {
-      state.rightCurrentFrame = 0
-      state.leftCurrentFrame = 0
-    }
-  })
+  // watch(() => state.keyframeList, (newValue) => {
+  //   if (newValue.length >= 2) {
+  //     state.leftCurrentFrame = newValue[0]
+  //     state.rightCurrentFrame = newValue[1]
+  //   } else if (newValue.length === 1) {
+  //     state.rightCurrentFrame = newValue[0]
+  //     state.leftCurrentFrame = newValue[0]
+  //   } else {
+  //     state.rightCurrentFrame = 0
+  //     state.leftCurrentFrame = 0
+  //   }
+  // })
   watch(() => [
     state.objectAnnotationListMap,
     state.regionAnnotationListMap,
     state.skeletonAnnotationListMap,
     state.actionAnnotationList,
-    state.keyframeList
+    // state.keyframeList
   ], () => {
     mainStore.isSaved = false
   }, { deep: true })
@@ -138,7 +138,7 @@ export const useAnnotationStore = defineStore('annotation', () => {
       mainStore.isSaved = true
       return {
         video: state.video,
-        keyframeList: state.keyframeList,
+        // keyframeList: state.keyframeList,
         objectAnnotationListMap,
         regionAnnotationListMap,
         skeletonAnnotationListMap,
@@ -148,7 +148,7 @@ export const useAnnotationStore = defineStore('annotation', () => {
     importAnnotation: (data) => {
       const {
         video,
-        keyframeList,
+        // keyframeList,
         objectAnnotationListMap,
         regionAnnotationListMap,
         skeletonAnnotationListMap,
@@ -178,9 +178,9 @@ export const useAnnotationStore = defineStore('annotation', () => {
             'warning')
         }
       }
-      /// keyframeList
-      state.keyframeList = keyframeList
-      state.rightCurrentFrame = keyframeList.length >= 2 ? keyframeList[1] : keyframeList[0]
+      // /// keyframeList
+      // state.keyframeList = keyframeList
+      // state.rightCurrentFrame = keyframeList.length >= 2 ? keyframeList[1] : keyframeList[0]
       /// objectAnnotationListMap
       for (let frame in objectAnnotationListMap) {
         const objectAnnotationList = objectAnnotationListMap[frame]

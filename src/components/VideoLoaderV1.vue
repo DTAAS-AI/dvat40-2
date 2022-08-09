@@ -31,29 +31,29 @@ const handleLoadeddata = (event) => {
   if (!annotationStore.video.fps) annotationStore.video.fps = preferenceStore.defaultFps
   if (!annotationStore.video.frames) annotationStore.video.frames = Math.round(
       annotationStore.video.fps * annotationStore.video.duration)
-  const keyframeList = []
-  if (annotationStore.keyframeList.length === 0) {
-    // init keyframe list
-    for (let i = 0; i < annotationStore.video.frames; i += preferenceStore.defaultFpk) {
-      keyframeList.push(i)
-    }
-    annotationStore.keyframeList = keyframeList
-  }
+  // const keyframeList = []
+  // if (annotationStore.keyframeList.length === 0) {
+  //   // init keyframe list
+  //   for (let i = 0; i < annotationStore.video.frames; i += preferenceStore.defaultFpk) {
+  //     keyframeList.push(i)
+  //   }
+  //   annotationStore.keyframeList = keyframeList
+  // }
   const interval = parseFloat((1 / annotationStore.video.fps).toFixed(3))
   // add keyframe to priorityQueue
-  for (const keyframe of keyframeList) {
-    if (keyframe !== 0) {
-      annotationStore.priorityQueue.push(keyframe)
-    }
-  }
+  // for (const keyframe of keyframeList) {
+  //   if (keyframe !== 0) {
+  //     annotationStore.priorityQueue.push(keyframe)
+  //   }
+  // }
   // add frame index into the backendQueue
   // 1. every one second
   annotationStore.backendQueue = []
   for (let i = 1.0; i < annotationStore.video.duration; i++) {
     const index = utils.time2index(i)
-    if (keyframeList.indexOf(index) === -1) {
-      annotationStore.backendQueue.push(index)
-    }
+    // if (keyframeList.indexOf(index) === -1) {
+    //   annotationStore.backendQueue.push(index)
+    // }
   }
   // 2. every 1 / fps second
   annotationStore.priorityQueue = []

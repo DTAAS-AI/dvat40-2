@@ -24,7 +24,7 @@
     </div>
     <ObjectLabelTable/>
     <ActionLabelTable/>
-    <SkeletonTypeTable/>
+    <!-- <SkeletonTypeTable/> -->
   </div>
 </template>
 
