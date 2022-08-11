@@ -32,4 +32,9 @@ public/video/*
 !src/public/video/example.mp4
 
 public/dataset
+<<<<<<< HEAD
 src/video
+=======
+src/video
+src/annotation
+>>>>>>> eb94c9beb7b27a706817fe7e06294e77740b643e

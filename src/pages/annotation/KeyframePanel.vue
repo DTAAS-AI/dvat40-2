@@ -19,13 +19,13 @@
       >
         <q-tooltip v-if="showVideoPlayer">stop</q-tooltip>
       </q-btn>
-      <q-btn
+      <!-- <q-btn
           outline
           :icon="showEdit ? 'done' : 'edit'"
           @click="showEdit = !showEdit"
       >
         <q-tooltip>{{ showEdit ? 'done' : 'edit' }}</q-tooltip>
-      </q-btn>
+      </q-btn> -->
     </q-btn-group>
     <div
         class="col-grow q-px-lg"
@@ -53,7 +53,7 @@
           @update:model-value="handleInput"
       />
     </div>
-    <q-btn-group flat>
+    <!-- <q-btn-group flat>
       <q-btn
           outline
           icon="keyboard_arrow_left"
@@ -75,7 +75,7 @@
       >
         <q-tooltip>next keyframe (&gt)</q-tooltip>
       </q-btn>
-    </q-btn-group>
+    </q-btn-group> -->
   </div>
   <KeyframeTable v-if="showEdit"/>
 </template>
@@ -149,86 +149,86 @@ const handleStop = () => {
   annotationStore.leftCurrentFrame = lastLeftCurrentFrame
 }
 
-// right buttons
-const nearestKeyframe = currentFrame => {
-  let min = annotationStore.video.frames
-  let nearestKeyframe = currentFrame
-  for (let i = 0; i < annotationStore.keyframeList.length; i++) {
-    let distance = Math.abs(currentFrame - annotationStore.keyframeList[i])
-    if (distance < min) {
-      min = distance
-      nearestKeyframe = annotationStore.keyframeList[i]
-    }
-  }
-  return nearestKeyframe
-}
-const handlePreviousKeyframe = () => { // base on right most one
-  const leftCurrentKeyFrame = nearestKeyframe(annotationStore.leftCurrentFrame)
-  const rightCurrentKeyFrame = nearestKeyframe(annotationStore.rightCurrentFrame)
-  const leftCurrentKeyFrameIndex = annotationStore.keyframeList.indexOf(leftCurrentKeyFrame)
-  const rightCurrentKeyFrameIndex = annotationStore.keyframeList.indexOf(rightCurrentKeyFrame)
-  if (leftCurrentKeyFrameIndex <= 0 || rightCurrentKeyFrameIndex <= 0) {
-    annotationStore.leftCurrentFrame = 0
-    annotationStore.rightCurrentFrame = annotationStore.keyframeList[1] || 0
-  } else if (leftCurrentKeyFrameIndex === rightCurrentKeyFrameIndex) {
-    annotationStore.leftCurrentFrame = annotationStore.keyframeList[rightCurrentKeyFrameIndex - 1]
-    annotationStore.rightCurrentFrame = rightCurrentKeyFrame
-  } else if (leftCurrentKeyFrameIndex < rightCurrentKeyFrameIndex) {
-    if (rightCurrentKeyFrameIndex - 2 < 0) {
-      annotationStore.leftCurrentFrame = 0
-      annotationStore.rightCurrentFrame = annotationStore.keyframeList[1] || 0
-    } else {
-      annotationStore.leftCurrentFrame = annotationStore.keyframeList[rightCurrentKeyFrameIndex - 2]
-      annotationStore.rightCurrentFrame = annotationStore.keyframeList[rightCurrentKeyFrameIndex - 1]
-    }
-  } else {
-    annotationStore.leftCurrentFrame = rightCurrentKeyFrame
-    annotationStore.rightCurrentFrame = leftCurrentKeyFrame
-  }
-}
-const handleNearestKeyframe = () => {
-  const leftCurrentKeyFrame = nearestKeyframe(annotationStore.leftCurrentFrame)
-  const rightCurrentKeyFrame = nearestKeyframe(annotationStore.rightCurrentFrame)
-  const leftCurrentKeyFrameIndex = annotationStore.keyframeList.indexOf(leftCurrentKeyFrame)
-  const rightCurrentKeyFrameIndex = annotationStore.keyframeList.indexOf(rightCurrentKeyFrame)
-  if (rightCurrentKeyFrameIndex - leftCurrentKeyFrameIndex === 1) {
-    annotationStore.leftCurrentFrame = leftCurrentKeyFrame
-    annotationStore.rightCurrentFrame = rightCurrentKeyFrame
-  } else {
-    annotationStore.leftCurrentFrame = leftCurrentKeyFrame
-    annotationStore.rightCurrentFrame = annotationStore.keyframeList[leftCurrentKeyFrameIndex + 1] ||
-        leftCurrentKeyFrame
-  }
-}
-const handleNextKeyframe = () => { // base on left most one
-  const leftCurrentKeyFrame = nearestKeyframe(annotationStore.leftCurrentFrame)
-  const rightCurrentKeyFrame = nearestKeyframe(annotationStore.rightCurrentFrame)
-  const leftCurrentKeyFrameIndex = annotationStore.keyframeList.indexOf(leftCurrentKeyFrame)
-  const rightCurrentKeyFrameIndex = annotationStore.keyframeList.indexOf(rightCurrentKeyFrame)
-  const lastIndex = annotationStore.keyframeList.length - 1
-  if (leftCurrentKeyFrameIndex >= lastIndex || rightCurrentKeyFrameIndex >= lastIndex) {
-    annotationStore.leftCurrentFrame = lastIndex - 1 >= 0
-        ? annotationStore.keyframeList[lastIndex - 1]
-        : annotationStore.keyframeList[lastIndex]
-    annotationStore.rightCurrentFrame = annotationStore.keyframeList[lastIndex]
-  } else if (leftCurrentKeyFrameIndex === rightCurrentKeyFrameIndex) {
-    annotationStore.leftCurrentFrame = leftCurrentKeyFrame
-    annotationStore.rightCurrentFrame = annotationStore.keyframeList[leftCurrentKeyFrameIndex + 1]
-  } else if (leftCurrentKeyFrameIndex < rightCurrentKeyFrameIndex) {
-    if (leftCurrentKeyFrameIndex + 2 > lastIndex) {
-      annotationStore.leftCurrentFrame = lastIndex - 1 >= 0
-          ? annotationStore.keyframeList[lastIndex - 1]
-          : annotationStore.keyframeList[lastIndex]
-      annotationStore.rightCurrentFrame = annotationStore.keyframeList[lastIndex]
-    } else {
-      annotationStore.leftCurrentFrame = annotationStore.keyframeList[leftCurrentKeyFrameIndex + 1]
-      annotationStore.rightCurrentFrame = annotationStore.keyframeList[leftCurrentKeyFrameIndex + 2]
-    }
-  } else {
-    annotationStore.leftCurrentFrame = leftCurrentKeyFrame
-    annotationStore.rightCurrentFrame = annotationStore.keyframeList[leftCurrentKeyFrameIndex + 1]
-  }
-}
+// // right buttons
+// const nearestKeyframe = currentFrame => {
+//   let min = annotationStore.video.frames
+//   let nearestKeyframe = currentFrame
+//   for (let i = 0; i < annotationStore.keyframeList.length; i++) {
+//     let distance = Math.abs(currentFrame - annotationStore.keyframeList[i])
+//     if (distance < min) {
+//       min = distance
+//       nearestKeyframe = annotationStore.keyframeList[i]
+//     }
+//   }
+//   return nearestKeyframe
+// }
+// const handlePreviousKeyframe = () => { // base on right most one
+//   const leftCurrentKeyFrame = nearestKeyframe(annotationStore.leftCurrentFrame)
+//   const rightCurrentKeyFrame = nearestKeyframe(annotationStore.rightCurrentFrame)
+//   const leftCurrentKeyFrameIndex = annotationStore.keyframeList.indexOf(leftCurrentKeyFrame)
+//   const rightCurrentKeyFrameIndex = annotationStore.keyframeList.indexOf(rightCurrentKeyFrame)
+//   if (leftCurrentKeyFrameIndex <= 0 || rightCurrentKeyFrameIndex <= 0) {
+//     annotationStore.leftCurrentFrame = 0
+//     annotationStore.rightCurrentFrame = annotationStore.keyframeList[1] || 0
+//   } else if (leftCurrentKeyFrameIndex === rightCurrentKeyFrameIndex) {
+//     annotationStore.leftCurrentFrame = annotationStore.keyframeList[rightCurrentKeyFrameIndex - 1]
+//     annotationStore.rightCurrentFrame = rightCurrentKeyFrame
+//   } else if (leftCurrentKeyFrameIndex < rightCurrentKeyFrameIndex) {
+//     if (rightCurrentKeyFrameIndex - 2 < 0) {
+//       annotationStore.leftCurrentFrame = 0
+//       annotationStore.rightCurrentFrame = annotationStore.keyframeList[1] || 0
+//     } else {
+//       annotationStore.leftCurrentFrame = annotationStore.keyframeList[rightCurrentKeyFrameIndex - 2]
+//       annotationStore.rightCurrentFrame = annotationStore.keyframeList[rightCurrentKeyFrameIndex - 1]
+//     }
+//   } else {
+//     annotationStore.leftCurrentFrame = rightCurrentKeyFrame
+//     annotationStore.rightCurrentFrame = leftCurrentKeyFrame
+//   }
+// }
+// const handleNearestKeyframe = () => {
+//   const leftCurrentKeyFrame = nearestKeyframe(annotationStore.leftCurrentFrame)
+//   const rightCurrentKeyFrame = nearestKeyframe(annotationStore.rightCurrentFrame)
+//   const leftCurrentKeyFrameIndex = annotationStore.keyframeList.indexOf(leftCurrentKeyFrame)
+//   const rightCurrentKeyFrameIndex = annotationStore.keyframeList.indexOf(rightCurrentKeyFrame)
+//   if (rightCurrentKeyFrameIndex - leftCurrentKeyFrameIndex === 1) {
+//     annotationStore.leftCurrentFrame = leftCurrentKeyFrame
+//     annotationStore.rightCurrentFrame = rightCurrentKeyFrame
+//   } else {
+//     annotationStore.leftCurrentFrame = leftCurrentKeyFrame
+//     annotationStore.rightCurrentFrame = annotationStore.keyframeList[leftCurrentKeyFrameIndex + 1] ||
+//         leftCurrentKeyFrame
+//   }
+// }
+// const handleNextKeyframe = () => { // base on left most one
+//   const leftCurrentKeyFrame = nearestKeyframe(annotationStore.leftCurrentFrame)
+//   const rightCurrentKeyFrame = nearestKeyframe(annotationStore.rightCurrentFrame)
+//   const leftCurrentKeyFrameIndex = annotationStore.keyframeList.indexOf(leftCurrentKeyFrame)
+//   const rightCurrentKeyFrameIndex = annotationStore.keyframeList.indexOf(rightCurrentKeyFrame)
+//   const lastIndex = annotationStore.keyframeList.length - 1
+//   if (leftCurrentKeyFrameIndex >= lastIndex || rightCurrentKeyFrameIndex >= lastIndex) {
+//     annotationStore.leftCurrentFrame = lastIndex - 1 >= 0
+//         ? annotationStore.keyframeList[lastIndex - 1]
+//         : annotationStore.keyframeList[lastIndex]
+//     annotationStore.rightCurrentFrame = annotationStore.keyframeList[lastIndex]
+//   } else if (leftCurrentKeyFrameIndex === rightCurrentKeyFrameIndex) {
+//     annotationStore.leftCurrentFrame = leftCurrentKeyFrame
+//     annotationStore.rightCurrentFrame = annotationStore.keyframeList[leftCurrentKeyFrameIndex + 1]
+//   } else if (leftCurrentKeyFrameIndex < rightCurrentKeyFrameIndex) {
+//     if (leftCurrentKeyFrameIndex + 2 > lastIndex) {
+//       annotationStore.leftCurrentFrame = lastIndex - 1 >= 0
+//           ? annotationStore.keyframeList[lastIndex - 1]
+//           : annotationStore.keyframeList[lastIndex]
+//       annotationStore.rightCurrentFrame = annotationStore.keyframeList[lastIndex]
+//     } else {
+//       annotationStore.leftCurrentFrame = annotationStore.keyframeList[leftCurrentKeyFrameIndex + 1]
+//       annotationStore.rightCurrentFrame = annotationStore.keyframeList[leftCurrentKeyFrameIndex + 2]
+//     }
+//   } else {
+//     annotationStore.leftCurrentFrame = leftCurrentKeyFrame
+//     annotationStore.rightCurrentFrame = annotationStore.keyframeList[leftCurrentKeyFrameIndex + 1]
+//   }
+// }
 
 // key bindings
 const moveLeftFrame = delta => {

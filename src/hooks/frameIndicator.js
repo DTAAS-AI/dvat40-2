@@ -12,7 +12,7 @@ export const frameIndicator = () => {
 
   const COLOR_BACKGROUND = 'linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2))'
   const COLOR_BACKGROUND_DARK = 'linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2))'
-  const COLOR_KEYFRAME = 'linear-gradient(#000, #000)'
+  // const COLOR_KEYFRAME = 'linear-gradient(#000, #000)'
   const COLOR_OBJECT = 'linear-gradient(var(--q-primary), var(--q-primary))'
   const COLOR_REGION = 'linear-gradient(var(--q-info), var(--q-info))'
   const COLOR_SKELETON = 'linear-gradient(var(--q-positive), var(--q-positive))'
@@ -52,11 +52,11 @@ export const frameIndicator = () => {
 
     let positionHeightOffset = 0
 
-    getStyleList(
-      annotationStore.keyframeList.map(keyframe => [keyframe, 1]),
-      annotationStore.keyframeList.map(() => COLOR_KEYFRAME),
-      positionHeightOffset
-    )
+    // getStyleList(
+    //   annotationStore.keyframeList.map(keyframe => [keyframe, 1]),
+    //   annotationStore.keyframeList.map(() => COLOR_KEYFRAME),
+    //   positionHeightOffset
+    // )
 
     if (preferenceStore.objects) {
       const frameList = Object.entries(annotationStore.objectAnnotationListMap).

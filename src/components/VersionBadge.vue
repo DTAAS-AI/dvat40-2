@@ -1,10 +1,5 @@
 <template>
-  <a
-      href="https://github.com/anucvml/vidat/releases"
-      target="_blank"
-  >
-    <q-badge color="primary">v{{ version }}</q-badge>
-  </a>
+  <q-badge color="primary">v{{ version }}</q-badge>
 </template>
 
 <script setup>

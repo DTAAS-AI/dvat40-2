@@ -16,16 +16,16 @@ const DEFAULT_ANNOTATION = {
     width: undefined
   },
 
-  objectAnnotationListMap: {},
-  regionAnnotationListMap: {},
-  skeletonAnnotationListMap: {},
+  // objectAnnotationListMap: {},
+  // regionAnnotationListMap: {},
+  // skeletonAnnotationListMap: {},
   actionAnnotationList: [],
 
   leftCurrentFrame: 0,
   rightCurrentFrame: 0,
-  keyframeList: [],
+  // keyframeList: [],
   mode: 'object', // 'object', 'region', 'skeleton', 'action'
-  skeletonTypeId: 0,
+  // skeletonTypeId: 0,
 
   priorityQueue: [],
   backendQueue: [],
@@ -69,24 +69,24 @@ export const useAnnotationStore = defineStore('annotation', () => {
       immediate: true
     }
   )
-  watch(() => state.keyframeList, (newValue) => {
-    if (newValue.length >= 2) {
-      state.leftCurrentFrame = newValue[0]
-      state.rightCurrentFrame = newValue[1]
-    } else if (newValue.length === 1) {
-      state.rightCurrentFrame = newValue[0]
-      state.leftCurrentFrame = newValue[0]
-    } else {
-      state.rightCurrentFrame = 0
-      state.leftCurrentFrame = 0
-    }
-  })
+  // watch(() => state.keyframeList, (newValue) => {
+  //   if (newValue.length >= 2) {
+  //     state.leftCurrentFrame = newValue[0]
+  //     state.rightCurrentFrame = newValue[1]
+  //   } else if (newValue.length === 1) {
+  //     state.rightCurrentFrame = newValue[0]
+  //     state.leftCurrentFrame = newValue[0]
+  //   } else {
+  //     state.rightCurrentFrame = 0
+  //     state.leftCurrentFrame = 0
+  //   }
+  // })
   watch(() => [
-    state.objectAnnotationListMap,
-    state.regionAnnotationListMap,
-    state.skeletonAnnotationListMap,
+    // state.objectAnnotationListMap,
+    // state.regionAnnotationListMap,
+    // state.skeletonAnnotationListMap,
     state.actionAnnotationList,
-    state.keyframeList
+    // state.keyframeList
   ], () => {
     mainStore.isSaved = false
   }, { deep: true })
@@ -99,59 +99,59 @@ export const useAnnotationStore = defineStore('annotation', () => {
       const annotation = deepClone(defaultAnnotation)
       annotation.mode = state.mode
       annotation.zoom = state.zoom
-      annotation.skeletonTypeId = state.skeletonTypeId
+      // annotation.skeletonTypeId = state.skeletonTypeId
       annotation.isSaved = true
       Object.keys(state).map(key => state[key] = annotation[key])
     },
     exportAnnotation: () => {
-      const objectAnnotationListMap = {}
-      for (const frame in state.objectAnnotationListMap) {
-        if (state.objectAnnotationListMap[frame].length) {
-          objectAnnotationListMap[frame] = state.objectAnnotationListMap[frame]
-        }
-      }
-      const regionAnnotationListMap = {}
-      for (const frame in state.regionAnnotationListMap) {
-        if (state.regionAnnotationListMap[frame].length) {
-          regionAnnotationListMap[frame] = state.regionAnnotationListMap[frame]
-        }
-      }
-      // remove type in each skeletonAnnotation
-      const skeletonAnnotationListMap = {}
-      for (const frame in state.skeletonAnnotationListMap) {
-        if (state.skeletonAnnotationListMap[frame].length) {
-          skeletonAnnotationListMap[frame] = state.skeletonAnnotationListMap[frame].map(
-            skeletonAnnotation => {
-              return {
-                instance: skeletonAnnotation.instance,
-                score: skeletonAnnotation.score,
-                centerX: skeletonAnnotation.centerX,
-                centerY: skeletonAnnotation.centerY,
-                typeId: skeletonAnnotation.typeId,
-                color: skeletonAnnotation.color,
-                _ratio: skeletonAnnotation._ratio,
-                pointList: skeletonAnnotation.pointList
-              }
-            })
-        }
-      }
+      // const objectAnnotationListMap = {}
+      // for (const frame in state.objectAnnotationListMap) {
+      //   if (state.objectAnnotationListMap[frame].length) {
+      //     objectAnnotationListMap[frame] = state.objectAnnotationListMap[frame]
+      //   }
+      // }
+      // const regionAnnotationListMap = {}
+      // for (const frame in state.regionAnnotationListMap) {
+      //   if (state.regionAnnotationListMap[frame].length) {
+      //     regionAnnotationListMap[frame] = state.regionAnnotationListMap[frame]
+      //   }
+      // }
+      // // remove type in each skeletonAnnotation
+      // const skeletonAnnotationListMap = {}
+      // for (const frame in state.skeletonAnnotationListMap) {
+      //   if (state.skeletonAnnotationListMap[frame].length) {
+      //     skeletonAnnotationListMap[frame] = state.skeletonAnnotationListMap[frame].map(
+      //       skeletonAnnotation => {
+      //         return {
+      //           instance: skeletonAnnotation.instance,
+      //           score: skeletonAnnotation.score,
+      //           centerX: skeletonAnnotation.centerX,
+      //           centerY: skeletonAnnotation.centerY,
+      //           typeId: skeletonAnnotation.typeId,
+      //           color: skeletonAnnotation.color,
+      //           _ratio: skeletonAnnotation._ratio,
+      //           pointList: skeletonAnnotation.pointList
+      //         }
+      //       })
+      //   }
+      // }
       mainStore.isSaved = true
       return {
         video: state.video,
-        keyframeList: state.keyframeList,
-        objectAnnotationListMap,
-        regionAnnotationListMap,
-        skeletonAnnotationListMap,
+        // keyframeList: state.keyframeList,
+        // objectAnnotationListMap,
+        // regionAnnotationListMap,
+        // skeletonAnnotationListMap,
         actionAnnotationList: state.actionAnnotationList
       }
     },
     importAnnotation: (data) => {
       const {
         video,
-        keyframeList,
-        objectAnnotationListMap,
-        regionAnnotationListMap,
-        skeletonAnnotationListMap,
+        // keyframeList,
+        // objectAnnotationListMap,
+        // regionAnnotationListMap,
+        // skeletonAnnotationListMap,
         actionAnnotationList
       } = data
       /// video
@@ -178,61 +178,61 @@ export const useAnnotationStore = defineStore('annotation', () => {
             'warning')
         }
       }
-      /// keyframeList
-      state.keyframeList = keyframeList
-      state.rightCurrentFrame = keyframeList.length >= 2 ? keyframeList[1] : keyframeList[0]
-      /// objectAnnotationListMap
-      for (let frame in objectAnnotationListMap) {
-        const objectAnnotationList = objectAnnotationListMap[frame]
-        for (let i in objectAnnotationList) {
-          let objectAnnotation = objectAnnotationList[i]
-          objectAnnotationList[i] = new ObjectAnnotation(
-            objectAnnotation.x,
-            objectAnnotation.y,
-            objectAnnotation.width,
-            objectAnnotation.height,
-            objectAnnotation.labelId,
-            objectAnnotation.color,
-            objectAnnotation.instance,
-            objectAnnotation.score
-          )
-        }
-      }
-      state.objectAnnotationListMap = objectAnnotationListMap
-      /// regionAnnotationListMap
-      for (let frame in regionAnnotationListMap) {
-        const regionAnnotationList = regionAnnotationListMap[frame]
-        for (let i in regionAnnotationList) {
-          let regionAnnotation = regionAnnotationList[i]
-          regionAnnotationList[i] = new RegionAnnotation(
-            regionAnnotation.pointList,
-            regionAnnotation.labelId,
-            regionAnnotation.color,
-            regionAnnotation.instance,
-            regionAnnotation.score
-          )
-        }
-      }
-      state.regionAnnotationListMap = regionAnnotationListMap
-      /// skeletonAnnotationListMap
-      for (let frame in skeletonAnnotationListMap) {
-        const skeletonAnnotationList = skeletonAnnotationListMap[frame]
-        for (let i in skeletonAnnotationList) {
-          let skeletonAnnotation = skeletonAnnotationList[i]
-          const newSkeletonAnnotation = new SkeletonAnnotation(
-            skeletonAnnotation.centerX,
-            skeletonAnnotation.centerY,
-            skeletonAnnotation.typeId,
-            skeletonAnnotation.color,
-            skeletonAnnotation.instance,
-            skeletonAnnotation.score
-          )
-          newSkeletonAnnotation._ratio = skeletonAnnotation._ratio
-          newSkeletonAnnotation.pointList = skeletonAnnotation.pointList
-          skeletonAnnotationList[i] = newSkeletonAnnotation
-        }
-      }
-      state.skeletonAnnotationListMap = skeletonAnnotationListMap
+      // /// keyframeList
+      // state.keyframeList = keyframeList
+      // state.rightCurrentFrame = keyframeList.length >= 2 ? keyframeList[1] : keyframeList[0]
+      // /// objectAnnotationListMap
+      // for (let frame in objectAnnotationListMap) {
+      //   const objectAnnotationList = objectAnnotationListMap[frame]
+      //   for (let i in objectAnnotationList) {
+      //     let objectAnnotation = objectAnnotationList[i]
+      //     objectAnnotationList[i] = new ObjectAnnotation(
+      //       objectAnnotation.x,
+      //       objectAnnotation.y,
+      //       objectAnnotation.width,
+      //       objectAnnotation.height,
+      //       objectAnnotation.labelId,
+      //       objectAnnotation.color,
+      //       objectAnnotation.instance,
+      //       objectAnnotation.score
+      //     )
+      //   }
+      // }
+      // state.objectAnnotationListMap = objectAnnotationListMap
+      // /// regionAnnotationListMap
+      // for (let frame in regionAnnotationListMap) {
+      //   const regionAnnotationList = regionAnnotationListMap[frame]
+      //   for (let i in regionAnnotationList) {
+      //     let regionAnnotation = regionAnnotationList[i]
+      //     regionAnnotationList[i] = new RegionAnnotation(
+      //       regionAnnotation.pointList,
+      //       regionAnnotation.labelId,
+      //       regionAnnotation.color,
+      //       regionAnnotation.instance,
+      //       regionAnnotation.score
+      //     )
+      //   }
+      // }
+      // state.regionAnnotationListMap = regionAnnotationListMap
+      // /// skeletonAnnotationListMap
+      // for (let frame in skeletonAnnotationListMap) {
+      //   const skeletonAnnotationList = skeletonAnnotationListMap[frame]
+      //   for (let i in skeletonAnnotationList) {
+      //     let skeletonAnnotation = skeletonAnnotationList[i]
+      //     const newSkeletonAnnotation = new SkeletonAnnotation(
+      //       skeletonAnnotation.centerX,
+      //       skeletonAnnotation.centerY,
+      //       skeletonAnnotation.typeId,
+      //       skeletonAnnotation.color,
+      //       skeletonAnnotation.instance,
+      //       skeletonAnnotation.score
+      //     )
+      //     newSkeletonAnnotation._ratio = skeletonAnnotation._ratio
+      //     newSkeletonAnnotation.pointList = skeletonAnnotation.pointList
+      //     skeletonAnnotationList[i] = newSkeletonAnnotation
+      //   }
+      // }
+      // state.skeletonAnnotationListMap = skeletonAnnotationListMap
       /// actionAnnotationList
       for (let i in actionAnnotationList) {
         const actionAnnotation = actionAnnotationList[i]

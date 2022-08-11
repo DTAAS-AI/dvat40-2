@@ -219,13 +219,24 @@ let activeContext
 const actionIndicatorStyle = ref({
   bottom: '0'
 })
+// const actionList = computed(
+//     () => annotationStore.actionAnnotationList.filter(action =>
+//         currentFrame.value >= utils.time2index(action.start)
+//         && currentFrame.value <= utils.time2index(action.end)
+//     ).map(action => {
+//       return {
+//         name: configurationStore.actionLabelData.find(label => label.id === action.action).name,
+//         color: action.color
+//       }
+//     })
+// )
 const actionList = computed(
     () => annotationStore.actionAnnotationList.filter(action =>
         currentFrame.value >= utils.time2index(action.start)
         && currentFrame.value <= utils.time2index(action.end)
     ).map(action => {
       return {
-        name: configurationStore.actionLabelData.find(label => label.id === action.action).name,
+        name: configurationStore.objectLabelData.find(label => label.id === action.object).name,
         color: action.color
       }
     })

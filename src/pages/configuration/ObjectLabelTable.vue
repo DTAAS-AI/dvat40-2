@@ -1,6 +1,6 @@
 <template>
   <TableBase
-      title="Object Labels"
+      title="Actions"
       storeKey="objectLabelData"
       :columnList="columnList"
       :importFunction="configurationStore.importObjectLabelData"
@@ -38,6 +38,13 @@ const columnList = [
     label: 'operation',
     field: 'operation',
     type: 'operation'
+  },
+  {
+    name: 'code',
+    align: 'center',
+    label: 'code',
+    field: 'code',
+    type: 'input'
   }
 ]
 const configurationStore = useConfigurationStore()
