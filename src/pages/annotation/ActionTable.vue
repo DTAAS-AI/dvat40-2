@@ -157,7 +157,7 @@
               map-options
           ></q-select>
         </q-td>
-        <q-td
+        <!-- <q-td
             auto-width
             class="cursor-pointer text-center"
         >
@@ -175,15 +175,15 @@
           >
             <q-color v-model="props.row.color"></q-color>
           </q-popup-edit>
-        </q-td>
-        <q-td>
+        </q-td> -->
+        <!-- <q-td>
           <q-input
               v-model="props.row.description"
               dense
               borderless
               type="text"
           ></q-input>
-        </q-td>
+        </q-td> -->
         <q-td auto-width>
           <q-btn-group
               spread
@@ -270,18 +270,18 @@ const columnList = [
     label: 'action',
     field: 'object'
   },
-  {
-    name: 'color',
-    align: 'center',
-    label: 'color',
-    field: 'color'
-  },
-  {
-    name: 'description',
-    align: 'center',
-    label: 'description',
-    field: 'description'
-  },
+  // {
+  //   name: 'color',
+  //   align: 'center',
+  //   label: 'color',
+  //   field: 'color'
+  // },
+  // {
+  //   name: 'description',
+  //   align: 'center',
+  //   label: 'description',
+  //   field: 'description'
+  // },
   {
     name: 'operation',
     align: 'center',
@@ -297,8 +297,8 @@ const handleAdd = () => {
       utils.index2time(annotationStore.rightCurrentFrame),
       configurationStore.actionLabelData[0].id,
       configurationStore.actionLabelData[0].objects[0],
-      configurationStore.actionLabelData[0].color,
-      ''
+      // configurationStore.actionLabelData[0].color,
+      // ''
   ))
 }
 const handleAddAdvance = () => {
@@ -390,7 +390,7 @@ const handleThumbnailPreview = props => {
   }
 }
 const handleActionInput = (row) => {
-  row.color = configurationStore.actionLabelData.find(label => label.id === row.action).color
+  // row.color = configurationStore.actionLabelData.find(label => label.id === row.action).color
   row.object = configurationStore.actionLabelData.find(label => label.id === row.action).objects[0]
 }
 

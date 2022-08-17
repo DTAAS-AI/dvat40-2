@@ -237,7 +237,8 @@ const actionList = computed(
     ).map(action => {
       return {
         name: configurationStore.objectLabelData.find(label => label.id === action.object).name,
-        color: action.color
+        // color: action.color
+        color: configurationStore.objectLabelData.find(label => label.id === action.object).color
       }
     })
 )

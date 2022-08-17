@@ -718,17 +718,18 @@ class ActionAnnotation {
    * @param end
    * @param action
    * @param object
-   * @param color
-   * @param description
+  //  * @param color
+  //  * @param description
    */
   constructor (
-    start, end = null, action = null, object = null, color = null, description = null) {
+    // start, end = null, action = null, object = null, color = null, description = null) {
+    start, end = null, action = null, object = null) {
     this.start = start
     this.end = end
     this.action = action
     this.object = object
-    this.color = color
-    this.description = description
+    // this.color = color
+    // this.description = description
   }
 }
 

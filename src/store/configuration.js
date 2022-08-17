@@ -801,7 +801,8 @@ export const useConfigurationStore = defineStore('configuration', () => {
     importActionLabelData,
     // importSkeletonTypeData,
     importConfig: (data) => {
-      const { objectLabelData, actionLabelData, skeletonTypeData } = data
+    //   const { objectLabelData, actionLabelData, skeletonTypeData } = data
+      const { objectLabelData, actionLabelData } = data
       importObjectLabelData(objectLabelData)
       importActionLabelData(actionLabelData)
       // importSkeletonTypeData(skeletonTypeData)

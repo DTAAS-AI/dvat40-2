@@ -241,8 +241,8 @@ export const useAnnotationStore = defineStore('annotation', () => {
           actionAnnotation.end,
           actionAnnotation.action,
           actionAnnotation.object,
-          actionAnnotation.color,
-          actionAnnotation.description
+          // actionAnnotation.color,
+          // actionAnnotation.description
         )
       }
       state.actionAnnotationList = actionAnnotationList

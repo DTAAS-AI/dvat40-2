@@ -2,6 +2,7 @@ import { useQuasar } from 'quasar'
 import { computed } from 'vue'
 import utils from '~/libs/utils.js'
 import { useAnnotationStore } from '~/store/annotation.js'
+import { useConfigurationStore } from '~/store/configuration'
 import { usePreferenceStore } from '~/store/preference.js'
 
 export const frameIndicator = () => {
@@ -19,6 +20,8 @@ export const frameIndicator = () => {
 
   const annotationStore = useAnnotationStore()
   const preferenceStore = usePreferenceStore()
+  // useConfigurationStore 추가
+  const configurationStore = useConfigurationStore()
   const q = useQuasar()
 
   let bgImageList = []
@@ -111,7 +114,8 @@ export const frameIndicator = () => {
         const startFrame = utils.time2index(action.start)
         const endFrame = utils.time2index(action.end)
         frameList.push([startFrame, (endFrame - startFrame + 1)])
-        colorList.push(`linear-gradient(${action.color}, ${action.color})`)
+        // colorList.push(`linear-gradient(${action.color}, ${action.color})`)
+        colorList.push(`linear-gradient(${configurationStore.objectLabelData.find(label => label.id === action.object).color}, ${configurationStore.objectLabelData.find(label => label.id === action.object).color})`)
       }
       if (ALWAYS_SHOW || frameList.length) {
         positionHeightOffset += HEIGHT_UNIT
