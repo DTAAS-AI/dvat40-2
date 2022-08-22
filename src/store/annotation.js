@@ -7,6 +7,13 @@ import { usePreferenceStore } from '~/store/preference.js'
 import { ActionAnnotation, ObjectAnnotation, RegionAnnotation, SkeletonAnnotation } from '../libs/annotationlib.js'
 
 const DEFAULT_ANNOTATION = {
+  info: {
+    // project select 추가
+    name: "Motion Capture Dataset",
+    creator: "Dtaas Consortium",
+    date_created: "2022/06/03",
+    project: 'Select Project' // '40-1', '40-2'
+  },
   video: {
     src: undefined,
     fps: undefined,

@@ -80,7 +80,7 @@ const columnList = [
   {
     name: 'nObjects',
     align: 'center',
-    label: '#objects',
+    label: '#actions',
     field: (row) => row.objects.length
   },
   {

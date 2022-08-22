@@ -14,6 +14,7 @@ export const useAnnotation = () => {
     try {
       const {
         version,
+        // TODO : project info 추가
         annotation,
         config
       } = obj
@@ -57,6 +58,7 @@ export const useAnnotation = () => {
         'annotations').onOk(filename => {
         const data = {
           version: PACKAGE_VERSION,
+          // TODO : project info 추가
           annotation: annotationStore.exportAnnotation(),
           config: configurationStore.exportConfig()
         }

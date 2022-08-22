@@ -73,9 +73,9 @@
     </div>
     <div>
       <q-item dense>
-        <q-item-section class="text-center">Mode</q-item-section>
+        <q-item-section class="text-center">Project 선택</q-item-section>
       </q-item>
-      <q-item>
+      <!-- <q-item>
         <q-item-section>
           <q-select
               v-model="annotationStore.mode"
@@ -85,6 +85,19 @@
               options-dense
               :options="modeOptions"
               :readonly="modeOptions.length === 1"
+          ></q-select>
+        </q-item-section>
+      </q-item> -->
+      <q-item>
+        <q-item-section>
+          <q-select
+              label="Project"
+              v-model="annotationStore.info.project"
+              outlined
+              stack-label
+              dense
+              options-dense
+              :options="projectSelect"
           ></q-select>
         </q-item-section>
       </q-item>
@@ -533,4 +546,9 @@ const videoPlaybackRateOptions = [
     value: 2.0
   }
 ]
+
+// project option
+
+const projectSelect = ["40-1", "40-2"]
+
 </script>
