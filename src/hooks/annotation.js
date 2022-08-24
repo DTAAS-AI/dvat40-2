@@ -2,7 +2,8 @@ import { copyToClipboard, exportFile } from 'quasar'
 import { ref } from 'vue'
 import utils from '~/libs/utils.js'
 import { useAnnotationStore } from '~/store/annotation.js'
-import { useConfigurationStore } from '~/store/configuration.js'
+// import { useConfigurationStore } from '~/store/configuration.js'
+import { useConfigurationStore, DEFAULT_CONFIGURATION, CONFIGURATION_40_1, CONFIGURATION_40_2 } from '~/store/configuration.js'
 import { useMainStore } from '~/store/index.js'
 
 export const useAnnotation = () => {
@@ -12,18 +13,32 @@ export const useAnnotation = () => {
   const submitLoading = ref(false)
   const loadAnnotation = (obj) => {
     try {
-      const {
-        version,
-        // TODO : project info 추가
-        annotation,
-        config
-      } = obj
+      // const {
+      //   version,
+      //   info,
+      //   // TODO : project info 추가
+      //   annotation,
+      //   config
+      // } = obj
+      // 변수 선언부 개별 분리, 필요한 내용만 로드하도록 수정
+      const version = obj.version;
+      const info = obj.info;
+      const annotation = obj.annotation;
+      // config -> project에 따라 달리 불러오도록 수정
+      let config = obj.config;
       // version
       if (version !== PACKAGE_VERSION) {
         utils.notify('Version mismatch, weird stuff is likely to happen! ' + version + ' != ' + PACKAGE_VERSION,
           'warning')
       }
-      // config
+      // config -> project에 따라 달리 불러오도록 수정
+      if (info.project === '40-1'){
+        config = CONFIGURATION_40_1
+      } else if (info.project === '40-2'){
+        config = CONFIGURATION_40_2
+      } else {
+        config = DEFAULT_CONFIGURATION
+      }
       configurationStore.importConfig(config)
       // annotation
       annotationStore.importAnnotation(annotation)
@@ -52,23 +67,32 @@ export const useAnnotation = () => {
       }
     },
     handleSave: () => {
-      utils.prompt(
-        'Save',
-        'Enter annotation filename for saving',
-        'annotations').onOk(filename => {
-        const data = {
-          version: PACKAGE_VERSION,
-          // TODO : project info 추가
-          annotation: annotationStore.exportAnnotation(),
-          config: configurationStore.exportConfig()
-        }
-        exportFile(
-          filename + '.json',
-          new Blob([JSON.stringify(data)]),
-          { mimeType: 'text/plain' }
-        )
-        mainStore.drawer = false
-      })
+      //프로젝트 미선택시 예외처리 추가
+      if (annotationStore.info.project === "Select Project") {
+        utils.confirm(
+          '프로젝트를 지정해주세요'
+        ).onOk(() => {
+        })
+      } else {
+        utils.prompt(
+          'Save',
+          'Enter annotation filename for saving',
+          'annotations').onOk(filename => {
+          const data = {
+            version: PACKAGE_VERSION,
+            // TODO : project info 추가
+            info: annotationStore.info,
+            annotation: annotationStore.exportAnnotation(),
+            // config: configurationStore.exportConfig()
+          }
+          exportFile(
+            filename + '.json',
+            new Blob([JSON.stringify(data)]),
+            { mimeType: 'text/plain' }
+          )
+          mainStore.drawer = false
+        })
+      }
     },
     handleSubmit: () => {
       submitLoading.value = true
