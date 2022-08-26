@@ -126,6 +126,28 @@
         <q-td auto-width>
           {{ utils.toFixed2(props.row.end - props.row.start) }}
         </q-td>
+        <!-- Select 방식 -->
+        <!-- <q-td auto-width>
+          <q-select
+              v-model="props.row.actor_id"
+              :options="actorIdList"
+              dense
+              options-dense
+              borderless
+              emit-value
+              map-options
+          ></q-select>
+        </q-td> -->
+        <!-- Input 방식 -->
+        <q-td auto-width>
+          <q-input
+                style="min-width: 100px;"
+                v-model.number="props.row.actor_id"
+                dense
+                borderless
+                type="number"
+          ></q-input>
+        </q-td>
         <q-td>
           <img
               v-if="configurationStore.actionLabelData.find(label => label.id === props.row.action).thumbnail"
@@ -259,6 +281,11 @@ const columnList = [
     label: 'duration'
   },
   {
+    name: 'actor_id',
+    align: 'center',
+    label: 'actor_id'
+  },
+  {
     name: 'action',
     align: 'center',
     label: 'category',
@@ -295,6 +322,7 @@ const handleAdd = () => {
   annotationStore.actionAnnotationList.push(new ActionAnnotation(
       utils.index2time(annotationStore.leftCurrentFrame),
       utils.index2time(annotationStore.rightCurrentFrame),
+      0,
       configurationStore.actionLabelData[0].id,
       configurationStore.actionLabelData[0].objects[0],
       // configurationStore.actionLabelData[0].color,
@@ -364,6 +392,9 @@ const actionSort = (rows, sortBy, descending) => {
 }
 
 // body
+// //actoridlist 추가
+// //input 방식으로 일단 변경
+// const actorIdList = [1, 2, 3, 4]
 const actionOptionList = computed(() => configurationStore.actionLabelData.map(label => {
   return {
     label: label.name,

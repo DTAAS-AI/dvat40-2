@@ -246,6 +246,7 @@ export const useAnnotationStore = defineStore('annotation', () => {
         actionAnnotationList[i] = new ActionAnnotation(
           actionAnnotation.start,
           actionAnnotation.end,
+          actionAnnotation.actor_id,
           actionAnnotation.action,
           actionAnnotation.object,
           // actionAnnotation.color,
