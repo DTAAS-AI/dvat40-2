@@ -95,7 +95,15 @@
       </div>
     </template>
     <template v-slot:body="props">
-      <q-tr :class="{ 'bg-warning': props.row.end - props.row.start <= 0, 'bg-green-2': props.row === annotationStore.currentThumbnailAction}">
+      <q-tr
+        :class="{ 'bg-warning': props.row.end - props.row.start <= 0,
+                  'bg-green-2': props.row === annotationStore.currentThumbnailAction,
+                  'bg-red-1': props.row.appearance_id === 1,
+                  'bg-yellow-1': props.row.appearance_id === 2,
+                  'bg-green-1': props.row.appearance_id === 3,
+                  'bg-blue-1': props.row.appearance_id === 4
+                }"
+      >
         <q-tooltip
             anchor="top middle"
             v-if="props.row.end - props.row.start <= 0"
@@ -140,12 +148,24 @@
         </q-td> -->
         <!-- Input 방식 -->
         <q-td auto-width>
+          <q-select
+              v-model="props.row.appearance_id"
+              :options="appearanceIdList"
+              dense
+              options-dense
+              borderless
+              emit-value
+              map-options
+          ></q-select>
+        </q-td>
+        <q-td auto-width>
           <q-input
                 style="min-width: 100px;"
                 v-model.number="props.row.actor_id"
                 dense
                 borderless
                 type="number"
+                readonly
           ></q-input>
         </q-td>
         <q-td>
@@ -281,6 +301,11 @@ const columnList = [
     label: 'duration'
   },
   {
+    name: 'appearance_id',
+    align: 'center',
+    label: 'appearance_id'
+  },
+  {
     name: 'actor_id',
     align: 'center',
     label: 'actor_id'
@@ -322,6 +347,7 @@ const handleAdd = () => {
   annotationStore.actionAnnotationList.push(new ActionAnnotation(
       utils.index2time(annotationStore.leftCurrentFrame),
       utils.index2time(annotationStore.rightCurrentFrame),
+      0,
       0,
       configurationStore.actionLabelData[0].id,
       configurationStore.actionLabelData[0].objects[0],
@@ -392,9 +418,31 @@ const actionSort = (rows, sortBy, descending) => {
 }
 
 // body
-// //actoridlist 추가
-// //input 방식으로 일단 변경
-// const actorIdList = [1, 2, 3, 4]
+// appearanceIdList 추가
+// const appearanceIdList = [1, 2, 3, 4]
+const appearanceIdList = [
+    {
+      label:'1',
+      value:1,
+      color:"red"
+    },
+    {
+      label:'2',
+      value:2,
+      color:"yellow"
+    },
+    {
+      label:'3',
+      value:3,
+      color:"green"
+    },
+    {
+      label:'4',
+      value:4,
+      color:"blue"
+    }
+  ]
+
 const actionOptionList = computed(() => configurationStore.actionLabelData.map(label => {
   return {
     label: label.name,

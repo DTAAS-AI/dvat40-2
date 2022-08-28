@@ -716,6 +716,7 @@ class ActionAnnotation {
    * Constructor
    * @param start
    * @param end
+   * @param appearance_id
    * @param actor_id
    * @param action
    * @param object
@@ -724,9 +725,10 @@ class ActionAnnotation {
    */
   constructor (
     // start, end = null, action = null, object = null, color = null, description = null) {
-    start, end = null, actor_id = null, action = null, object = null) {
+    start, end = null, appearance_id = null, actor_id = null, action = null, object = null) {
     this.start = start
     this.end = end
+    this.appearance_id = appearance_id
     this.actor_id = actor_id
     this.action = action
     this.object = object
