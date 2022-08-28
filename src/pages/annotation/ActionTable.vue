@@ -15,13 +15,13 @@
       <div class="col-6 q-table__title">Actions</div>
       <q-space></q-space>
       <q-btn-group flat>
-        <q-btn
+        <!-- <q-btn
             size="sm"
             outline
             :icon="showFilter ? 'expand_more' : 'expand_less'"
             label="filter"
             @click="showFilter = !showFilter"
-        ></q-btn>
+        ></q-btn> -->
         <q-btn
             size="sm"
             outline
@@ -29,9 +29,9 @@
             label="add"
             @click="handleAdd"
         >
-          <q-tooltip>add current range (+)</q-tooltip>
+          <q-tooltip>라벨링 추가</q-tooltip>
         </q-btn>
-        <q-btn
+        <!-- <q-btn
             size="sm"
             outline
             icon="new_label"
@@ -39,7 +39,7 @@
             @click="handleAddAdvance"
         >
           <q-tooltip>add current range and advance for next</q-tooltip>
-        </q-btn>
+        </q-btn> -->
         <q-btn
             size="sm"
             outline
@@ -47,7 +47,7 @@
             label="clear"
             @click="handleClearAll"
         >
-          <q-tooltip>Bulk clear all actions</q-tooltip>
+          <q-tooltip>모든 라벨링 태그 삭제</q-tooltip>
         </q-btn>
       </q-btn-group>
       <div
@@ -149,14 +149,16 @@
         <!-- Input 방식 -->
         <q-td auto-width>
           <q-select
-              v-model="props.row.appearance_id"
-              :options="appearanceIdList"
-              dense
-              options-dense
-              borderless
-              emit-value
-              map-options
-          ></q-select>
+            v-model="props.row.appearance_id"
+            :options="appearanceIdList"
+            dense
+            options-dense
+            borderless
+            emit-value
+            map-options
+          >
+            <q-tooltip>화면 왼쪽부터 순서대로 등장인물 순서를 선택해 주세요</q-tooltip>
+          </q-select>
         </q-td>
         <q-td auto-width>
           <q-input
@@ -238,7 +240,7 @@
                 style="width: 100%"
                 @click="handleGoto(props.row)"
             >
-              <q-tooltip>Locate to the action</q-tooltip>
+              <q-tooltip>해당 구간으로 이동</q-tooltip>
             </q-btn>
             <q-btn
                 flat
@@ -247,7 +249,7 @@
                 style="width: 100%"
                 @click="handleSet(props.row)"
             >
-              <q-tooltip>Set current left / right frame as this action's start / end</q-tooltip>
+              <q-tooltip>현재 선택 구간에 맞추기</q-tooltip>
             </q-btn>
             <q-btn
                 flat
@@ -303,7 +305,8 @@ const columnList = [
   {
     name: 'appearance_id',
     align: 'center',
-    label: 'appearance_id'
+    label: 'appearance_id',
+    sortable: true
   },
   {
     name: 'actor_id',

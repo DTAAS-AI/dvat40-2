@@ -13,7 +13,7 @@ export const DEFAULT_CONFIGURATION = {
         {
             "id": 0,
             "name": "default",
-            "color": "#00FF00",
+            "color": "#CCCCCC",
             "code": "A000"
         },
         {
@@ -873,7 +873,7 @@ export const DEFAULT_CONFIGURATION = {
         {
             "id": 0,
             "name": "default",
-            "color": "#0000FF",
+            "color": "#CCCCCC",
             "objects": [
                 0
             ]

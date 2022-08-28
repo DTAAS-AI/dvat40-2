@@ -11,8 +11,8 @@ export const frameIndicator = () => {
   const HEIGHT_UNIT = 16
   const HEIGHT_MARKER = 8
 
-  const COLOR_BACKGROUND = 'linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2))'
-  const COLOR_BACKGROUND_DARK = 'linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2))'
+  const COLOR_BACKGROUND = 'linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1))'
+  const COLOR_BACKGROUND_DARK = 'linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1))'
   // const COLOR_KEYFRAME = 'linear-gradient(#000, #000)'
   const COLOR_OBJECT = 'linear-gradient(var(--q-primary), var(--q-primary))'
   const COLOR_REGION = 'linear-gradient(var(--q-info), var(--q-info))'
@@ -61,51 +61,52 @@ export const frameIndicator = () => {
     //   positionHeightOffset
     // )
 
-    if (preferenceStore.objects) {
-      const frameList = Object.entries(annotationStore.objectAnnotationListMap).
-        filter(([, annotationList]) => annotationList.length).
-        map(([frame]) => [parseInt(frame), 1])
-      if (ALWAYS_SHOW || frameList.length) {
-        positionHeightOffset += HEIGHT_UNIT
-        getBackgroundStyleList(positionHeightOffset)
-        getStyleList(
-          frameList,
-          frameList.map(() => COLOR_OBJECT),
-          positionHeightOffset
-        )
-      }
-    }
+    // if (preferenceStore.objects) {
+    //   const frameList = Object.entries(annotationStore.objectAnnotationListMap).
+    //     filter(([, annotationList]) => annotationList.length).
+    //     map(([frame]) => [parseInt(frame), 1])
+    //   if (ALWAYS_SHOW || frameList.length) {
+    //     positionHeightOffset += HEIGHT_UNIT
+    //     getBackgroundStyleList(positionHeightOffset)
+    //     getStyleList(
+    //       frameList,
+    //       frameList.map(() => COLOR_OBJECT),
+    //       positionHeightOffset
+    //     )
+    //   }
+    // }
 
-    if (preferenceStore.regions) {
-      const frameList = Object.entries(annotationStore.regionAnnotationListMap).
-        filter(([, annotationList]) => annotationList.length).
-        map(([frame]) => [parseInt(frame), 1])
-      if (ALWAYS_SHOW || frameList.length) {
-        positionHeightOffset += HEIGHT_UNIT
-        getBackgroundStyleList(positionHeightOffset)
-        getStyleList(
-          frameList,
-          frameList.map(() => COLOR_REGION),
-          positionHeightOffset
-        )
-      }
-    }
+    // if (preferenceStore.regions) {
+    //   const frameList = Object.entries(annotationStore.regionAnnotationListMap).
+    //     filter(([, annotationList]) => annotationList.length).
+    //     map(([frame]) => [parseInt(frame), 1])
+    //   if (ALWAYS_SHOW || frameList.length) {
+    //     positionHeightOffset += HEIGHT_UNIT
+    //     getBackgroundStyleList(positionHeightOffset)
+    //     getStyleList(
+    //       frameList,
+    //       frameList.map(() => COLOR_REGION),
+    //       positionHeightOffset
+    //     )
+    //   }
+    // }
 
-    if (preferenceStore.skeletons) {
-      const frameList = Object.entries(annotationStore.skeletonAnnotationListMap).
-        filter(([, annotationList]) => annotationList.length).
-        map(([frame]) => [parseInt(frame), 1])
-      if (ALWAYS_SHOW || frameList.length) {
-        positionHeightOffset += HEIGHT_UNIT
-        getBackgroundStyleList(positionHeightOffset)
-        getStyleList(
-          frameList,
-          frameList.map(() => COLOR_SKELETON),
-          positionHeightOffset
-        )
-      }
-    }
+    // if (preferenceStore.skeletons) {
+    //   const frameList = Object.entries(annotationStore.skeletonAnnotationListMap).
+    //     filter(([, annotationList]) => annotationList.length).
+    //     map(([frame]) => [parseInt(frame), 1])
+    //   if (ALWAYS_SHOW || frameList.length) {
+    //     positionHeightOffset += HEIGHT_UNIT
+    //     getBackgroundStyleList(positionHeightOffset)
+    //     getStyleList(
+    //       frameList,
+    //       frameList.map(() => COLOR_SKELETON),
+    //       positionHeightOffset
+    //     )
+    //   }
+    // }
 
+    //appearance id 1
     if (preferenceStore.actions) {
       const frameList = []
       const colorList = []
@@ -113,13 +114,114 @@ export const frameIndicator = () => {
         const action = annotationStore.actionAnnotationList[i]
         const startFrame = utils.time2index(action.start)
         const endFrame = utils.time2index(action.end)
-        frameList.push([startFrame, (endFrame - startFrame + 1)])
-        // colorList.push(`linear-gradient(${action.color}, ${action.color})`)
-        colorList.push(`linear-gradient(${configurationStore.objectLabelData.find(label => label.id === action.object).color}, ${configurationStore.objectLabelData.find(label => label.id === action.object).color})`)
+        if (annotationStore.actionAnnotationList[i].appearance_id === 1){
+          frameList.push([startFrame, (endFrame - startFrame + 1)])
+          // colorList.push(`linear-gradient(${action.color}, ${action.color})`)
+          colorList.push(`linear-gradient(${configurationStore.objectLabelData.find(label => label.id === action.object).color}, ${configurationStore.objectLabelData.find(label => label.id === action.object).color})`)
+        }
       }
       if (ALWAYS_SHOW || frameList.length) {
         positionHeightOffset += HEIGHT_UNIT
         getBackgroundStyleList(positionHeightOffset)
+        // // color 직접 지정 -> 지정시 오류
+        // bgImageList.push('linear-gradient(rgba(255, 235, 238, 1), rgba(255, 235, 238, 1))');
+        // bgPositionList.push(
+        //   `0% ${12 + positionHeightOffset}px`)
+        // bgSizeList.push(`100% ${HEIGHT_MARKER}px`)
+        // // //
+        getStyleList(
+          frameList,
+          colorList,
+          positionHeightOffset
+        )
+      }
+    }
+
+    //appearance id 2
+    if (preferenceStore.actions) {
+      const frameList = []
+      const colorList = []
+      for (let i = 0; i < annotationStore.actionAnnotationList.length; i++) {
+        const action = annotationStore.actionAnnotationList[i]
+        const startFrame = utils.time2index(action.start)
+        const endFrame = utils.time2index(action.end)
+        if (annotationStore.actionAnnotationList[i].appearance_id === 2){
+          frameList.push([startFrame, (endFrame - startFrame + 1)])
+          // colorList.push(`linear-gradient(${action.color}, ${action.color})`)
+          colorList.push(`linear-gradient(${configurationStore.objectLabelData.find(label => label.id === action.object).color}, ${configurationStore.objectLabelData.find(label => label.id === action.object).color})`)
+        }
+      }
+      if (ALWAYS_SHOW || frameList.length) {
+        positionHeightOffset += HEIGHT_UNIT
+        getBackgroundStyleList(positionHeightOffset)
+        // // color 직접 지정
+        // bgImageList.push('linear-gradient(rgba(255, 253, 231, 1), rgba(255, 253, 231, 1))');
+        // bgPositionList.push(
+        //   `0% ${12 + positionHeightOffset}px`)
+        // bgSizeList.push(`100% ${HEIGHT_MARKER}px`)
+        // // //
+        getStyleList(
+          frameList,
+          colorList,
+          positionHeightOffset
+        )
+      }
+    }
+
+    //appearance id 3
+    if (preferenceStore.actions) {
+      const frameList = []
+      const colorList = []
+      for (let i = 0; i < annotationStore.actionAnnotationList.length; i++) {
+        const action = annotationStore.actionAnnotationList[i]
+        const startFrame = utils.time2index(action.start)
+        const endFrame = utils.time2index(action.end)
+        if (annotationStore.actionAnnotationList[i].appearance_id === 3){
+          frameList.push([startFrame, (endFrame - startFrame + 1)])
+          // colorList.push(`linear-gradient(${action.color}, ${action.color})`)
+          colorList.push(`linear-gradient(${configurationStore.objectLabelData.find(label => label.id === action.object).color}, ${configurationStore.objectLabelData.find(label => label.id === action.object).color})`)
+        }
+      }
+      if (ALWAYS_SHOW || frameList.length) {
+        positionHeightOffset += HEIGHT_UNIT
+        getBackgroundStyleList(positionHeightOffset)
+        // // color 직접 지정
+        // bgImageList.push('linear-gradient(rgba(232, 245, 233, 1), rgba(232, 245, 233, 1))');
+        // bgPositionList.push(
+        //   `0% ${12 + positionHeightOffset}px`)
+        // bgSizeList.push(`100% ${HEIGHT_MARKER}px`)
+        // // //
+        getStyleList(
+          frameList,
+          colorList,
+          positionHeightOffset
+        )
+      }
+    }
+
+    //appearance id 4
+    if (preferenceStore.actions) {
+      const frameList = []
+      const colorList = []
+      for (let i = 0; i < annotationStore.actionAnnotationList.length; i++) {
+        const action = annotationStore.actionAnnotationList[i]
+        const startFrame = utils.time2index(action.start)
+        const endFrame = utils.time2index(action.end)
+        if (annotationStore.actionAnnotationList[i].appearance_id === 4){
+          frameList.push([startFrame, (endFrame - startFrame + 1)])
+          // colorList.push(`linear-gradient(${action.color}, ${action.color})`)
+          colorList.push(`linear-gradient(${configurationStore.objectLabelData.find(label => label.id === action.object).color}, ${configurationStore.objectLabelData.find(label => label.id === action.object).color})`)
+        }
+      }
+      if (ALWAYS_SHOW || frameList.length) {
+        positionHeightOffset += HEIGHT_UNIT
+        getBackgroundStyleList(positionHeightOffset)
+        // // color 직접 지정
+        // bgImageList.push('linear-gradient(rgba(227, 242, 253, 1), rgba(227, 242, 253, 1))');
+        // bgPositionList.push(
+        //   `0% ${12 + positionHeightOffset}px`)
+        // bgSizeList.push(`100% ${HEIGHT_MARKER}px`)
+        // // //
         getStyleList(
           frameList,
           colorList,
