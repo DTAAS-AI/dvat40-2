@@ -26,13 +26,13 @@
           label="open video"
           @click="handleOpen"
       />
-      <q-btn
+      <!-- <q-btn
           outline
           icon="file_upload"
           color="primary"
           label="load annotation"
           @click="handleLoad"
-      />
+      /> -->
     </q-btn-group>
     <!-- <div style="margin-top: 20px;">
       <router-link
