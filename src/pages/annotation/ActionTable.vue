@@ -111,7 +111,7 @@
             anchor="top middle"
             self="bottom middle" :offset="[0,0]"
             v-if="props.row.end - props.row.start <= 0"
-        >구간의 길이는 0보다 커야 합니다. 시작지점과 종료지점을 알맞게 지정해 주세요.
+        >동작 구간의 길이는 0보다 커야 합니다. 시작지점과 종료지점을 알맞게 지정해 주세요.
         </q-tooltip>
         <q-tooltip
             class="bg-dark text-body2"
