@@ -55,7 +55,7 @@ const handleSave = () => {
   utils.prompt(
       'Save',
       'Enter configuration filename for saving',
-      'config'
+      'config_40_2'
   ).onOk(filename => {
     const data = configurationStore.exportConfig()
     const file = new Blob([JSON.stringify(data)], { type: 'text/plain' })

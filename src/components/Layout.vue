@@ -40,7 +40,7 @@
               class="vertical-middle"
               :to="'/'"
           >
-            DTAAS Video Annotation Tool
+            DTAAS Video Annotation Tool 40-2
           </router-link>
         </q-toolbar-title>
         <q-circular-progress

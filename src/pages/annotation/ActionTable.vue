@@ -97,6 +97,8 @@
     <template v-slot:body="props">
       <q-tr
         :class="{ 'bg-warning': props.row.end - props.row.start <= 0,
+                  'bg-warning': props.row.appearance_id === 0,
+                  'bg-warning': props.row.object === 0,
                   'bg-green-2': props.row === annotationStore.currentThumbnailAction,
                   'bg-red-1': props.row.appearance_id === 1,
                   'bg-yellow-1': props.row.appearance_id === 2,
@@ -105,9 +107,25 @@
                 }"
       >
         <q-tooltip
+            class="bg-dark text-body2"
             anchor="top middle"
+            self="bottom middle" :offset="[0,0]"
             v-if="props.row.end - props.row.start <= 0"
-        >Duration should be greater than 0.
+        >구간의 길이는 0보다 커야 합니다. 시작지점과 종료지점을 알맞게 지정해 주세요.
+        </q-tooltip>
+        <q-tooltip
+            class="bg-dark text-body2"
+            anchor="top middle"
+            self="bottom middle" :offset="[0,40]"
+            v-if="props.row.appearance_id === 0"
+        >동작을 수행한 액터 번호를 지정해주세요. 시작화면을 기준으로 왼쪽부터 1, 2, 3, 4번을 부여해주세요.
+        </q-tooltip>
+        <q-tooltip
+            class="bg-dark text-body2"
+            anchor="top middle"
+            self="bottom middle" :offset="[0,80]"
+            v-if="props.row.object === 0"
+        >적절한 동작 카테고리를 지정해주세요.
         </q-tooltip>
         <q-td auto-width>
           <q-input
