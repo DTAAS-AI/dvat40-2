@@ -112,8 +112,8 @@ export const frameIndicator = () => {
       const colorList = []
       for (let i = 0; i < annotationStore.actionAnnotationList.length; i++) {
         const action = annotationStore.actionAnnotationList[i]
-        const startFrame = utils.time2index(action.start)
-        const endFrame = utils.time2index(action.end)
+        const startFrame = action.start
+        const endFrame = action.end
         if (annotationStore.actionAnnotationList[i].appearance_id === 1){
           frameList.push([startFrame, (endFrame - startFrame + 1)])
           // colorList.push(`linear-gradient(${action.color}, ${action.color})`)
@@ -143,8 +143,8 @@ export const frameIndicator = () => {
       const colorList = []
       for (let i = 0; i < annotationStore.actionAnnotationList.length; i++) {
         const action = annotationStore.actionAnnotationList[i]
-        const startFrame = utils.time2index(action.start)
-        const endFrame = utils.time2index(action.end)
+        const startFrame = action.start
+        const endFrame = action.end
         if (annotationStore.actionAnnotationList[i].appearance_id === 2){
           frameList.push([startFrame, (endFrame - startFrame + 1)])
           // colorList.push(`linear-gradient(${action.color}, ${action.color})`)
@@ -174,8 +174,8 @@ export const frameIndicator = () => {
       const colorList = []
       for (let i = 0; i < annotationStore.actionAnnotationList.length; i++) {
         const action = annotationStore.actionAnnotationList[i]
-        const startFrame = utils.time2index(action.start)
-        const endFrame = utils.time2index(action.end)
+        const startFrame = action.start
+        const endFrame = action.end
         if (annotationStore.actionAnnotationList[i].appearance_id === 3){
           frameList.push([startFrame, (endFrame - startFrame + 1)])
           // colorList.push(`linear-gradient(${action.color}, ${action.color})`)
@@ -205,8 +205,8 @@ export const frameIndicator = () => {
       const colorList = []
       for (let i = 0; i < annotationStore.actionAnnotationList.length; i++) {
         const action = annotationStore.actionAnnotationList[i]
-        const startFrame = utils.time2index(action.start)
-        const endFrame = utils.time2index(action.end)
+        const startFrame = action.start
+        const endFrame = action.end
         if (annotationStore.actionAnnotationList[i].appearance_id === 4){
           frameList.push([startFrame, (endFrame - startFrame + 1)])
           // colorList.push(`linear-gradient(${action.color}, ${action.color})`)

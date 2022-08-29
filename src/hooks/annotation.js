@@ -59,8 +59,7 @@ export const useAnnotation = () => {
     handleLoad: () => {
       if (annotationStore.hasVideo) {
         utils.confirm(
-          `로드하시겠습니까?\n
-          현재 라벨링 데이터가 삭제되고 새로운 라벨링 데이터를 불러옵니다.`
+          '로드하시겠습니까? 현재 라벨링 데이터가 삭제되고 새로운 라벨링 데이터를 불러옵니다.'
         ).onOk(() => {
           loadAnnotationFromFile()
         })
