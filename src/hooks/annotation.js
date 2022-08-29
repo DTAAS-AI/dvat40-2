@@ -100,6 +100,17 @@ export const useAnnotation = () => {
             new Blob([JSON.stringify(data)]),
             { mimeType: 'text/plain' }
           )
+          for (let j = 1; j <= 4; j++){
+            let actorData = JSON.parse(JSON.stringify(data));
+            actorData.annotation.actionAnnotationList = actorData.annotation.actionAnnotationList.filter(obj => obj.appearance_id === j)
+            if (actorData.annotation.actionAnnotationList.length !== 0){
+              exportFile(
+                filename + '_' + j +'.json',
+                new Blob([JSON.stringify(actorData)]),
+                { mimeType: 'text/plain' }
+              )
+            }
+          }
           mainStore.drawer = false
         })
       }
