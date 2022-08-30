@@ -5,12 +5,31 @@ import { useAnnotationStore } from '~/store/annotation.js'
 // import { useConfigurationStore } from '~/store/configuration.js'
 import { useConfigurationStore } from '~/store/configuration.js'
 import { useMainStore } from '~/store/index.js'
+import deepClone from 'lodash.clonedeep'
 
 export const useAnnotation = () => {
   const configurationStore = useConfigurationStore()
   const annotationStore = useAnnotationStore()
   const mainStore = useMainStore()
   const submitLoading = ref(false)
+  const importAdapter = (data) => {
+    data.actionAnnotationList.map(label => {
+      label.start = label.start_frame;
+      label.end = label.end_frame;
+      delete label.start_frame;
+      delete label.end_frame;
+    })
+    return data
+  }
+  const exportAdapter = (data) => {
+    data.actionAnnotationList.map(label => {
+      label.start_frame = label.start;
+      label.end_frame = label.end;
+      delete label.start;
+      delete label.end;
+    })
+    return data
+  }
   const loadAnnotation = (obj) => {
     try {
       // const {
@@ -42,7 +61,10 @@ export const useAnnotation = () => {
       // }
       // configurationStore.importConfig(config)
       // annotation
-      annotationStore.importAnnotation(annotation)
+      // adapter 추가
+      let adoptAnnotation = deepClone(annotation)
+      importAdapter(adoptAnnotation)
+      annotationStore.importAnnotation(adoptAnnotation)
       utils.notify('Annotation load successfully!', 'positive')
     } catch (e) {
       utils.notify(e.toString(), 'negative')
@@ -94,13 +116,16 @@ export const useAnnotation = () => {
             annotation: annotationStore.exportAnnotation(),
             // config: configurationStore.exportConfig()
           }
+          // data exportAdapter 추가 -> 형식에 맞게 export data 변형
+          let adoptedExportData = deepClone(data)
+          exportAdapter(adoptedExportData.annotation)
           exportFile(
             filename + '.json',
-            new Blob([JSON.stringify(data)]),
+            new Blob([JSON.stringify(adoptedExportData)]),
             { mimeType: 'text/plain' }
           )
           for (let j = 1; j <= 4; j++){
-            let actorData = JSON.parse(JSON.stringify(data));
+            let actorData = JSON.parse(JSON.stringify(adoptedExportData));
             actorData.annotation.actionAnnotationList = actorData.annotation.actionAnnotationList.filter(obj => obj.appearance_id === j)
             if (actorData.annotation.actionAnnotationList.length !== 0){
               exportFile(

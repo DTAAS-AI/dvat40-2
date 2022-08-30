@@ -13,8 +13,8 @@ export const useVideo = () => {
           utils.importVideo().then(({ type, videoSrc, filename }) => {
             mainStore.videoFormat = type
             annotationStore.video.src = videoSrc
-            mainStore.drawer = false
             annotationStore.video.filename = filename
+            mainStore.drawer = false
           })
         })
       } else {
