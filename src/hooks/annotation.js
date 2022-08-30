@@ -14,8 +14,8 @@ export const useAnnotation = () => {
   const submitLoading = ref(false)
   const importAdapter = (data) => {
     data.actionAnnotationList.map(label => {
-      label.start = label.start_frame;
-      label.end = label.end_frame;
+      label.start = label.start_frame / 6;
+      label.end = label.end_frame / 6;
       delete label.start_frame;
       delete label.end_frame;
     })
@@ -23,8 +23,8 @@ export const useAnnotation = () => {
   }
   const exportAdapter = (data) => {
     data.actionAnnotationList.map(label => {
-      label.start_frame = label.start;
-      label.end_frame = label.end;
+      label.start_frame = label.start * 6;
+      label.end_frame = label.end * 6;
       delete label.start;
       delete label.end;
     })

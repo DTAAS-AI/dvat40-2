@@ -14,6 +14,7 @@ export const useVideo = () => {
             mainStore.videoFormat = type
             annotationStore.video.src = videoSrc
             annotationStore.video.filename = filename
+            annotationStore.video.code = filename.split('.').slice(0,-1).join('.')
             mainStore.drawer = false
           })
         })
@@ -21,8 +22,9 @@ export const useVideo = () => {
         utils.importVideo().then(({ type, videoSrc, filename }) => {
           mainStore.videoFormat = type
           annotationStore.video.src = videoSrc
-          mainStore.drawer = false
           annotationStore.video.filename = filename
+          annotationStore.video.code = filename.split('.').slice(0,-1).join('.')
+          mainStore.drawer = false
         })
       }
     },
