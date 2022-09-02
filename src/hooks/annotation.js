@@ -19,6 +19,8 @@ export const useAnnotation = () => {
       delete label.start_frame;
       delete label.end_frame;
     })
+    data.video.fps = 10;
+    data.video.frames = data.video.frames / 6;
     return data
   }
   const exportAdapter = (data) => {
@@ -28,6 +30,8 @@ export const useAnnotation = () => {
       delete label.start;
       delete label.end;
     })
+    data.video.fps = 60;
+    data.video.frames = data.video.frames * 6;
     return data
   }
   const loadAnnotation = (obj) => {
