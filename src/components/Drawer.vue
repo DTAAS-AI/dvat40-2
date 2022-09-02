@@ -31,7 +31,7 @@
         <q-item
             clickable
             type="a"
-            href="https://dtaas.notion.site/2e3c66af94f349a983d86cc6777de5e3"
+            href="https://dtaas.notion.site/40-2-c0929a4c187843dd8ab316ce9609a859"
             target="_blank"
             @click="drawer = false"
         >
