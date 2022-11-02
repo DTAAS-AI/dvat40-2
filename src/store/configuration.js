@@ -1072,7 +1072,7 @@ export const DEFAULT_CONFIGURATION = {
         },
         {
             "id": 12,
-            "name": "앉은 상태에서의 설명(회사)",
+            "name": "앉은 상태에서의 발표(회사)",
             "color": "#7aa3c3",
             "objects": [
                 116,
@@ -1087,7 +1087,7 @@ export const DEFAULT_CONFIGURATION = {
         },
         {
             "id": 13,
-            "name": "일어선 상태에서의 발표(전시회)",
+            "name": "일어선 상태에서의 설명(전시회)",
             "color": "#0860a4",
             "objects": [
                 124,
